@@ -37,6 +37,18 @@ public class SchoolUtils {
         return phoneNumber.matches(regex);
 
     }
+
+
+    public static Department department7 (Department department){
+
+        for (Department department1 : Department.values()) {
+            if (department1.name().equalsIgnoreCase(department.toString())) {
+                return department1;
+            }
+        }
+        return null;
+    }
+
 }
 
 

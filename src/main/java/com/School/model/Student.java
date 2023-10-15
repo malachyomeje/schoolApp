@@ -4,6 +4,7 @@ import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +21,9 @@ import java.util.Date;
 @Entity(name = "School")
 @Table(name = "student_details")
 public class Student {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long Id;
     private String name;
     @Enumerated(value = EnumType.STRING)
@@ -37,17 +38,15 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Sex sex;
     private String age;
+    @JsonIgnore
     private String nameOfParent;
+    @JsonIgnore
+
     private String parentPhoneNo;
+    @JsonIgnore
     private String parentAddress;
     @CreationTimestamp
     private Date date;
-
-
-
-
-
-
 
 
 }
