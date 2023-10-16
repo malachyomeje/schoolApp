@@ -13,4 +13,6 @@ public interface StudentService {
     List<StudentDto> findAllStudent();
 
     List<StudentDepartmentDto> findAllStudentByDepartment(Department department);
+
+    BaseResponse findByEmail(Long id);
 }

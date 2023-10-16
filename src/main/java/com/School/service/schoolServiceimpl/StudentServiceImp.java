@@ -101,11 +101,8 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public List<StudentDepartmentDto> findAllStudentByDepartment(Department department) {
-
         List<Student> department1 = studentRepository.findAllByDepartment(department);
-
         List<StudentDepartmentDto> response = new ArrayList<>();
-        //  BeanUtils.copyProperties(department1,response);
 
         for (Student student1 : department1) {
 
@@ -122,11 +119,31 @@ public class StudentServiceImp implements StudentService {
             studentDto.setState(student1.getState());
 
             response.add(studentDto);
-
         }
-
-
         return response;
+    }
+
+
+    @Override
+    public BaseResponse findByEmail(Long id) {
+        Optional<Student> student = studentRepository.findById(id);
+        if (student.isEmpty()) {
+            return new BaseResponse<>("Student Already Exist", id);
+        }
+        Student student1 = student.get();
+        StudentDepartmentDto studentDto = new StudentDepartmentDto();
+        studentDto.setName(student1.getName());
+        studentDto.setDepartment(student1.getDepartment());
+        studentDto.setEmail(student1.getEmail());
+        studentDto.setAge(student1.getAge());
+        studentDto.setAddress(student1.getAddress());
+        studentDto.setPhoneNumber(student1.getPhoneNumber());
+        studentDto.setRegistrationNo(student1.getRegistrationNo());
+        studentDto.setSex(String.valueOf(student1.getSex()));
+        studentDto.setState(student1.getState());
+
+
+        return new BaseResponse<>("Successful", studentDto);
     }
 
 }
