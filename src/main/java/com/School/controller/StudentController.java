@@ -5,7 +5,7 @@ import com.School.dto.request.StudentDepartmentDto;
 import com.School.dto.request.StudentDto;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
-import com.School.model.Student;
+
 import com.School.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +32,12 @@ public class StudentController {
 
     @GetMapping("findAllStudentInDepartment")
     public List<StudentDepartmentDto>findAllStudentInDepartment(@RequestParam Department department){
-        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         return studentService.findAllStudentByDepartment(department);
+    }
+
+    @GetMapping("findByEmail")
+    public BaseResponse findByEmail(@RequestParam Long id) {
+        return studentService.findByEmail(id);
     }
 
 }
