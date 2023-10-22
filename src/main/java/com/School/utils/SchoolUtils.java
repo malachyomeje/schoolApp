@@ -39,10 +39,10 @@ public class SchoolUtils {
     }
 
 
-    public static Department department7 (Department department){
+    public static Department department7 (String department){
 
         for (Department department1 : Department.values()) {
-            if (department1.name().equalsIgnoreCase(department.toString())) {
+            if (department1.name().equalsIgnoreCase(department)) {
                 return department1;
             }
         }

@@ -101,6 +101,11 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public List<StudentDepartmentDto> findAllStudentByDepartment(Department department) {
+        Department department2 = SchoolUtils.department7(department.name());
+        if (department2 == null) {
+            throw new RuntimeException("you are  mad");
+        }
+
         List<Student> department1 = studentRepository.findAllByDepartment(department);
         List<StudentDepartmentDto> response = new ArrayList<>();
 
@@ -125,7 +130,7 @@ public class StudentServiceImp implements StudentService {
 
 
     @Override
-    public BaseResponse findByEmail(Long id) {
+    public BaseResponse findById(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isEmpty()) {
             return new BaseResponse<>("Student Already Exist", id);
