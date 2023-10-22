@@ -35,9 +35,9 @@ public class StudentController {
         return studentService.findAllStudentByDepartment(department);
     }
 
-    @GetMapping("findByEmail")
-    public BaseResponse findByEmail(@RequestParam Long id) {
-        return studentService.findByEmail(id);
+    @GetMapping("findById")
+    public BaseResponse findById(@RequestParam Long id) {
+        return studentService.findById(id);
     }
 
 }
