@@ -6,6 +6,7 @@ import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 import com.School.model.Student;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface StudentService {
     BaseResponse findById(Long id);
 
     ApiResponse<List<Student>> sorting(String name);
+
+    ApiResponse<Page<Student>> page(int offset, int pageSize);
 }

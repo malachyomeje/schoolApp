@@ -12,6 +12,8 @@ import com.School.repository.StudentRepository;
 import com.School.service.StudentService;
 import com.School.utils.SchoolUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -154,10 +156,15 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-public ApiResponse<List<Student>> sorting (String name ){
-        List<Student> sortingStudent= studentRepository.findAll(Sort.by(Sort.Direction.ASC,name));
-        return new ApiResponse<>(sortingStudent.size(),sortingStudent);
-}
+    public ApiResponse<List<Student>> sorting(String name) {
+        List<Student> sortingStudent = studentRepository.findAll(Sort.by(Sort.Direction.ASC, name));
+        return new ApiResponse<>(sortingStudent.size(), sortingStudent);
+    }
 
+    @Override
+    public ApiResponse<Page<Student>> page(int offset, int pageSize) {
+        Page<Student> paging = studentRepository.findAll(PageRequest.of(offset,pageSize));
+        return new ApiResponse<>(paging.getSize(), paging);
+    }
 }
 
