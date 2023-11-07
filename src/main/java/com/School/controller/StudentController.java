@@ -3,9 +3,11 @@ package com.School.controller;
 
 import com.School.dto.request.StudentDepartmentDto;
 import com.School.dto.request.StudentDto;
+import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 
+import com.School.model.Student;
 import com.School.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +40,11 @@ public class StudentController {
     @GetMapping("findById")
     public BaseResponse findById(@RequestParam Long id) {
         return studentService.findById(id);
+    }
+
+    @GetMapping("sorting/{name}")
+    public ApiResponse<List<Student>> sorting ( @PathVariable String name ) {
+        return studentService.sorting(name);
     }
 
 }

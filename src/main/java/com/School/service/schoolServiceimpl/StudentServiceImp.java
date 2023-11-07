@@ -2,6 +2,7 @@ package com.School.service.schoolServiceimpl;
 
 import com.School.dto.request.StudentDepartmentDto;
 import com.School.dto.request.StudentDto;
+import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 import com.School.enums.Faculty;
@@ -11,6 +12,7 @@ import com.School.repository.StudentRepository;
 import com.School.service.StudentService;
 import com.School.utils.SchoolUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -150,6 +152,12 @@ public class StudentServiceImp implements StudentService {
 
         return new BaseResponse<>("Successful", studentDto);
     }
+
+    @Override
+public ApiResponse<List<Student>> sorting (String name ){
+        List<Student> sortingStudent= studentRepository.findAll(Sort.by(Sort.Direction.ASC,name));
+        return new ApiResponse<>(sortingStudent.size(),sortingStudent);
+}
 
 }
 
