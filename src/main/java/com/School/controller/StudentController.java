@@ -11,6 +11,7 @@ import com.School.model.Student;
 import com.School.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,4 +48,11 @@ public class StudentController {
         return studentService.sorting(name);
     }
 
+
+
+    @GetMapping("page/{offset}/{pageSize}")
+    public ApiResponse<Page<Student>> page(@PathVariable int offset, @PathVariable int pageSize){
+        return studentService.page(offset,pageSize);
+
+    }
 }
