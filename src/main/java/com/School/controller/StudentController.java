@@ -48,8 +48,6 @@ public class StudentController {
         return studentService.sorting(name);
     }
 
-
-
     @GetMapping("page/{offset}/{pageSize}")
     public ApiResponse<Page<Student>> page(@PathVariable int offset, @PathVariable int pageSize){
         return studentService.page(offset,pageSize);
