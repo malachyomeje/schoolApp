@@ -64,7 +64,7 @@ public class StudentServiceImp implements StudentService {
                 .age(studentDto.getAge())
                 .address(studentDto.getAddress())
                 .phoneNumber(studentDto.getPhoneNumber())
-                .registrationNo(studentDto.getRegistrationNo())
+                .registrationNo(SchoolUtils.generateRegNo(studentDto.getDepartment()))
                 .sex(sex)
                 .state(studentDto.getState())
                 .nameOfParent(studentDto.getNameOfParent())
@@ -166,5 +166,7 @@ public class StudentServiceImp implements StudentService {
         Page<Student> paging = studentRepository.findAll(PageRequest.of(offset,pageSize));
         return new ApiResponse<>(paging.getSize(), paging);
     }
+
+
 }
 
