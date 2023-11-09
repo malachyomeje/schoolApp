@@ -18,8 +18,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "School")
-@Table(name = "student_details")
+@Entity
+
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,12 +41,13 @@ public class Student {
     @JsonIgnore
     private String nameOfParent;
     @JsonIgnore
-
     private String parentPhoneNo;
     @JsonIgnore
     private String parentAddress;
     @CreationTimestamp
     private Date date;
+    @OneToOne
+    private Library library;
 
 
 }
