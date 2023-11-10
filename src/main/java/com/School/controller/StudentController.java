@@ -7,7 +7,7 @@ import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 
-import com.School.model.Student;
+import com.School.schoolModel.Student;
 import com.School.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

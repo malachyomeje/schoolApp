@@ -2,7 +2,7 @@ package com.School.repository;
 
 import com.School.enums.Department;
 import com.School.enums.Faculty;
-import com.School.model.Student;
+import com.School.schoolModel.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

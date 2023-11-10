@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class LibraryDto {
+public class CategoryDto {
 
-    private String bookName;
-    private String author;
-    private String numberOfBooks;
-    private String isbnNo;
+    private String categoryName;
+    private String description;
+    private  String imageUrl;
 }
 

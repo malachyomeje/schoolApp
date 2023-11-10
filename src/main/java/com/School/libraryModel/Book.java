@@ -1,5 +1,6 @@
-package com.School.model;
+package com.School.libraryModel;
 
+import com.School.schoolModel.Student;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,17 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "library")
-public class Library {
+public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
     private String bookName;
     private String author;
     private String numberOfBooks;
-    private String  isbnNo;
-
-    @OneToOne
-    private Student student;
+    private String isbnNo;
+    private String categoryName;
 
 }
