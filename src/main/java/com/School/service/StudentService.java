@@ -5,7 +5,7 @@ import com.School.dto.request.StudentDto;
 import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
-import com.School.model.Student;
+import com.School.schoolModel.Student;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

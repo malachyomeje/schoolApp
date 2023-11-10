@@ -7,7 +7,7 @@ import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
-import com.School.model.Student;
+import com.School.schoolModel.Student;
 import com.School.repository.StudentRepository;
 import com.School.service.StudentService;
 import com.School.utils.SchoolUtils;

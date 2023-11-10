@@ -1,9 +1,8 @@
-package com.School.model;
+package com.School.schoolModel;
 
 import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
