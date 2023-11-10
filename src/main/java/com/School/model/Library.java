@@ -21,4 +21,7 @@ public class Library {
     private String numberOfBooks;
     private String  isbnNo;
 
+    @OneToOne
+    private Student student;
+
 }

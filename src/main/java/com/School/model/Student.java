@@ -46,8 +46,7 @@ public class Student {
     private String parentAddress;
     @CreationTimestamp
     private Date date;
-    @OneToOne
-    private Library library;
+
 
 
 }
