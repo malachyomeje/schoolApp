@@ -7,9 +7,9 @@ import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
-import com.School.schoolModel.Student;
-import com.School.repository.StudentRepository;
-import com.School.service.StudentService;
+import com.School.schoolModel.School;
+import com.School.repository.SchoolRepository;
+import com.School.service.SchoolService;
 import com.School.utils.SchoolUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,14 +23,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class StudentServiceImp implements StudentService {
+public class SchoolServiceImp implements SchoolService {
 
-    private final StudentRepository studentRepository;
+    private final SchoolRepository schoolRepository;
 
 
     @Override
     public BaseResponse registerStudent(StudentDto studentDto) {
-        Optional<Student> student = studentRepository.findAllByEmail(studentDto.getEmail());
+        Optional<School> student = schoolRepository.findByEmail(studentDto.getEmail());
 
         if (student.isPresent()) {
             return new BaseResponse<>("Student Already Exist", studentDto.getEmail());
@@ -56,7 +56,7 @@ public class StudentServiceImp implements StudentService {
         }
 
 
-        Student student1 = Student.builder()
+        School school1 = School.builder()
                 .name(studentDto.getName())
                 .faculty(faculty)
                 .department(department)
@@ -71,31 +71,31 @@ public class StudentServiceImp implements StudentService {
                 .parentPhoneNo(studentDto.getParentPhoneNo())
                 .parentAddress(studentDto.getParentAddress())
                 .build();
-        studentRepository.save(student1);
-        return new BaseResponse<>("registration successful", student1);
+        schoolRepository.save(school1);
+        return new BaseResponse<>("registration successful", school1);
     }
 
     @Override
     public List<StudentDto> findAllStudent() {
-        List<Student> list = studentRepository.findAll();
+        List<School> list = schoolRepository.findAll();
         List<StudentDto> student = new ArrayList<>();
 
-        for (Student student1 : list) {
+        for (School school1 : list) {
 
             StudentDto studentDto1 = new StudentDto();
-            studentDto1.setName(student1.getName());
-            studentDto1.setFaculty(String.valueOf(student1.getFaculty()));
-            studentDto1.setDepartment(student1.getDepartment().name());
-            studentDto1.setEmail(student1.getEmail());
-            studentDto1.setAge(student1.getAge());
-            studentDto1.setAddress(student1.getAddress());
-            studentDto1.setPhoneNumber(student1.getPhoneNumber());
-            studentDto1.setRegistrationNo(student1.getRegistrationNo());
-            studentDto1.setSex(String.valueOf(student1.getSex()));
-            studentDto1.setState(student1.getState());
-            studentDto1.setNameOfParent(student1.getNameOfParent());
-            studentDto1.setParentPhoneNo(student1.getParentPhoneNo());
-            studentDto1.setParentAddress(student1.getParentAddress());
+            studentDto1.setName(school1.getName());
+            studentDto1.setFaculty(String.valueOf(school1.getFaculty()));
+            studentDto1.setDepartment(school1.getDepartment().name());
+            studentDto1.setEmail(school1.getEmail());
+            studentDto1.setAge(school1.getAge());
+            studentDto1.setAddress(school1.getAddress());
+            studentDto1.setPhoneNumber(school1.getPhoneNumber());
+            studentDto1.setRegistrationNo(school1.getRegistrationNo());
+            studentDto1.setSex(String.valueOf(school1.getSex()));
+            studentDto1.setState(school1.getState());
+            studentDto1.setNameOfParent(school1.getNameOfParent());
+            studentDto1.setParentPhoneNo(school1.getParentPhoneNo());
+            studentDto1.setParentAddress(school1.getParentAddress());
 
             student.add(studentDto1);
         }
@@ -110,22 +110,22 @@ public class StudentServiceImp implements StudentService {
             throw new RuntimeException("you are  mad");
         }
 
-        List<Student> department1 = studentRepository.findAllByDepartment(department);
+        List<School> department1 = schoolRepository.findAllByDepartment(department);
         List<StudentDepartmentDto> response = new ArrayList<>();
 
-        for (Student student1 : department1) {
+        for (School school1 : department1) {
 
             StudentDepartmentDto studentDto = new StudentDepartmentDto();
 
-            studentDto.setName(student1.getName());
-            studentDto.setDepartment(Department.valueOf(student1.getDepartment().name()));
-            studentDto.setEmail(student1.getEmail());
-            studentDto.setAge(student1.getAge());
-            studentDto.setAddress(student1.getAddress());
-            studentDto.setPhoneNumber(student1.getPhoneNumber());
-            studentDto.setRegistrationNo(student1.getRegistrationNo());
-            studentDto.setSex(String.valueOf(student1.getSex()));
-            studentDto.setState(student1.getState());
+            studentDto.setName(school1.getName());
+            studentDto.setDepartment(Department.valueOf(school1.getDepartment().name()));
+            studentDto.setEmail(school1.getEmail());
+            studentDto.setAge(school1.getAge());
+            studentDto.setAddress(school1.getAddress());
+            studentDto.setPhoneNumber(school1.getPhoneNumber());
+            studentDto.setRegistrationNo(school1.getRegistrationNo());
+            studentDto.setSex(String.valueOf(school1.getSex()));
+            studentDto.setState(school1.getState());
 
             response.add(studentDto);
         }
@@ -135,35 +135,35 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public BaseResponse findById(Long id) {
-        Optional<Student> student = studentRepository.findById(id);
+        Optional<School> student = schoolRepository.findById(id);
         if (student.isEmpty()) {
             return new BaseResponse<>("Student Already Exist", id);
         }
-        Student student1 = student.get();
+        School school1 = student.get();
         StudentDepartmentDto studentDto = new StudentDepartmentDto();
-        studentDto.setName(student1.getName());
-        studentDto.setDepartment(student1.getDepartment());
-        studentDto.setEmail(student1.getEmail());
-        studentDto.setAge(student1.getAge());
-        studentDto.setAddress(student1.getAddress());
-        studentDto.setPhoneNumber(student1.getPhoneNumber());
-        studentDto.setRegistrationNo(student1.getRegistrationNo());
-        studentDto.setSex(String.valueOf(student1.getSex()));
-        studentDto.setState(student1.getState());
+        studentDto.setName(school1.getName());
+        studentDto.setDepartment(school1.getDepartment());
+        studentDto.setEmail(school1.getEmail());
+        studentDto.setAge(school1.getAge());
+        studentDto.setAddress(school1.getAddress());
+        studentDto.setPhoneNumber(school1.getPhoneNumber());
+        studentDto.setRegistrationNo(school1.getRegistrationNo());
+        studentDto.setSex(String.valueOf(school1.getSex()));
+        studentDto.setState(school1.getState());
 
 
         return new BaseResponse<>("Successful", studentDto);
     }
 
     @Override
-    public ApiResponse<List<Student>> sorting(String name) {
-        List<Student> sortingStudent = studentRepository.findAll(Sort.by(Sort.Direction.ASC, name));
-        return new ApiResponse<>(sortingStudent.size(), sortingStudent);
+    public ApiResponse<List<School>> sorting(String name) {
+        List<School> sortingSchool = schoolRepository.findAll(Sort.by(Sort.Direction.ASC, name));
+        return new ApiResponse<>(sortingSchool.size(), sortingSchool);
     }
 
     @Override
-    public ApiResponse<Page<Student>> page(int offset, int pageSize) {
-        Page<Student> paging = studentRepository.findAll(PageRequest.of(offset,pageSize));
+    public ApiResponse<Page<School>> page(int offset, int pageSize) {
+        Page<School> paging = schoolRepository.findAll(PageRequest.of(offset,pageSize));
         return new ApiResponse<>(paging.getSize(), paging);
     }
 

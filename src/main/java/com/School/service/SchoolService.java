@@ -5,12 +5,12 @@ import com.School.dto.request.StudentDto;
 import com.School.dto.response.ApiResponse;
 import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
-import com.School.schoolModel.Student;
+import com.School.schoolModel.School;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface StudentService {
+public interface SchoolService {
     BaseResponse registerStudent (StudentDto studentDto);
 
     List<StudentDto> findAllStudent();
@@ -19,7 +19,7 @@ public interface StudentService {
 
     BaseResponse findById(Long id);
 
-    ApiResponse<List<Student>> sorting(String name);
+    ApiResponse<List<School>> sorting(String name);
 
-    ApiResponse<Page<Student>> page(int offset, int pageSize);
+    ApiResponse<Page<School>> page(int offset, int pageSize);
 }

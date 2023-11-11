@@ -30,7 +30,7 @@ public class StudentDto implements Serializable {
     @Email(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"
             ,message = "enter correct email")
     private String email;
-    @NotBlank(message = "registrationNo must not be empty")
+  //  @NotBlank(message = "registrationNo must not be empty")
     private String registrationNo;
     @NotBlank(message = "sex must not be empty")
     private String sex;

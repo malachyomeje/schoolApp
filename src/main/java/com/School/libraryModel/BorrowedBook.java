@@ -1,5 +1,6 @@
 package com.School.libraryModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,24 +9,23 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Book {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class BorrowedBook {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
+    private String name;
+    private String email;
     private String bookName;
     private String author;
-    private String numberOfBooks;
-    private String isbnNo;
-    private String categoryName;
-    @ManyToOne
-    private LibraryStudent libraryStudent;
-    @ManyToOne
-    private BorrowedBook borrowedBook;
+    private String registrationNo;
 
-
+    @OneToMany(mappedBy = "borrowedBook")
+    List<Book>borrowedBook;
 }
