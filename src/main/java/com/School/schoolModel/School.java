@@ -3,6 +3,7 @@ package com.School.schoolModel;
 import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
+import com.School.enums.UsersRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,10 +12,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,61 +30,62 @@ public class School implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long Id;
-    private String name;
-    @Enumerated(value = EnumType.STRING)
-    private Faculty faculty;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String email;
+    private String phoneNumber;
+    private String registrationNo;
+    private String age;
+    private Sex sex;
+    private String address;
+    private String state;
+    private String nameOfParent;
+    private String parentPhoneNo;
+    private String parentAddress;
     @Enumerated(value = EnumType.STRING)
     private Department department;
-    private String state;
-    private String address;
-    private String phoneNumber;
-    private String email;
-    private String registrationNo;
+    @Enumerated(value = EnumType.STRING)
+    private Faculty faculty;
     @Enumerated(EnumType.STRING)
-    private Sex sex;
-    private String age;
-    @JsonIgnore
-    private String nameOfParent;
-    @JsonIgnore
-    private String parentPhoneNo;
-    @JsonIgnore
-    private String parentAddress;
+    private UsersRole role;
+    @Enumerated(EnumType.STRING)
     @CreationTimestamp
     private Date date;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
