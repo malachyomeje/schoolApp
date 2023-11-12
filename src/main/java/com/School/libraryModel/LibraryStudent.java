@@ -22,7 +22,8 @@ public class LibraryStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String phoneNumber;
     private String email;
     private String registrationNo;

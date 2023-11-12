@@ -28,8 +28,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/api/v0/auth/authenticate",
-                        "/api/v1/student/**",
-                        "/api/v2/category/**",
+                        "/api/v1/register/**",
+                        "/api/v2/libraryStudent/**",
+                        "/api/v3/category/**",
                         "/v3/api-docs/**",
                         "/configuration/**",
                         "/swagger*/**"

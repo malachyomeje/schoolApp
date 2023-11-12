@@ -15,7 +15,8 @@ import java.io.Serializable;
 @Data
 @Builder
 public class StudentDepartmentDto {
-    private String name;
+    private String firstName;
+    private String lastName;
     private Department department;
     private String state;
     private String address;

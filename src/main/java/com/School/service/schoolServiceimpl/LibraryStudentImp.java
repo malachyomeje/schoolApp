@@ -12,6 +12,7 @@ import com.School.repository.SchoolRepository;
 import com.School.schoolModel.School;
 import com.School.service.LibraryStudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,7 +44,8 @@ public class LibraryStudentImp implements LibraryStudentService {
         School school1 = school.get();
 
         LibraryStudent libraryStudent1 = LibraryStudent.builder()
-               .name(school1.getName())
+                .firstName(school1.getFirstName())
+                .lastName(school1.getLastName())
               .email(school1.getEmail())
                .department(school1.getDepartment())
                 .phoneNumber(school1.getPhoneNumber())
@@ -58,13 +60,13 @@ public class LibraryStudentImp implements LibraryStudentService {
     }
    public  BaseResponse borrowBook (BorrowedBookDto borrowedBookDto){
 
-       Optional<LibraryStudent> libraryStudent = libraryStudentRepository.findByEmail(borrowedBookDto.getEmail());
+       String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+       Optional<LibraryStudent> libraryStudent = libraryStudentRepository.findByEmail(email);
 
        if (libraryStudent.isEmpty()){
            return new BaseResponse<>("STUDENT NOT REGISTERED"+borrowedBookDto.getBorrowedBooks());
        }
-
-
        Optional<Book> bookOptional = bookRepository.findByBookName(borrowedBookDto.getBookName());
 
        if (bookOptional.isEmpty()){
@@ -74,12 +76,12 @@ public class LibraryStudentImp implements LibraryStudentService {
        Book book = bookOptional.get();
        LibraryStudent libraryStudent1 =libraryStudent.get();
 
-       BorrowedBook borrowedBook = BorrowedBook.builder()
-               .name(libraryStudent1.getName())
-               .email(borrowedBookDto.getEmail())
-               .borrowedBook(borrowedBookDto.getBorrowedBooks())
-
-               .build();
+       BorrowedBook borrowedBook = new BorrowedBook();
+//               .name(libraryStudent1.getName())
+//               .email(borrowedBookDto.getEmail())
+//               .borrowedBook(borrowedBookDto.getBorrowedBooks())
+//
+//               .build();
 
        return null;
    }

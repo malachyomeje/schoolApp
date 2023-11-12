@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("register")
+@RequestMapping("/api/v2/libraryStudent")
 public class LibraryStudentController {
     private final LibraryStudentService libraryStudentService;
 
