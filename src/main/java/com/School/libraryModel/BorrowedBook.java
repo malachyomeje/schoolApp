@@ -21,11 +21,9 @@ public class BorrowedBook {
 
     private Long id;
     private String name;
-    private String email;
-    private String bookName;
+     private String bookName;
     private String author;
-    private String registrationNo;
 
-    @OneToMany(mappedBy = "borrowedBook")
+   @OneToMany(mappedBy = "borrowedBook")
     List<Book>borrowedBook;
 }

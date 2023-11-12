@@ -37,19 +37,19 @@ public class School implements UserDetails {
     private String phoneNumber;
     private String registrationNo;
     private String age;
-    private Sex sex;
     private String address;
     private String state;
     private String nameOfParent;
     private String parentPhoneNo;
     private String parentAddress;
     @Enumerated(value = EnumType.STRING)
+    private Sex sex;
+    @Enumerated(value = EnumType.STRING)
     private Department department;
     @Enumerated(value = EnumType.STRING)
     private Faculty faculty;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value=EnumType.STRING)
     private UsersRole role;
-    @Enumerated(EnumType.STRING)
     @CreationTimestamp
     private Date date;
 
