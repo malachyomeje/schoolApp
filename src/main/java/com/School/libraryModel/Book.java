@@ -1,5 +1,6 @@
 package com.School.libraryModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,10 +23,8 @@ public class Book {
     private String numberOfBooks;
     private String isbnNo;
     private String categoryName;
-    @ManyToOne
-    private LibraryStudent libraryStudent;
-    @ManyToOne
-    private BorrowedBook borrowedBook;
+
+
 
 
 }

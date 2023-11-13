@@ -20,10 +20,9 @@ public class BorrowedBook {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Long id;
-    private String name;
-     private String bookName;
+    private String libraryStudent;
+    private String bookName;
     private String author;
-
-   @OneToMany(mappedBy = "borrowedBook")
-    List<Book>borrowedBook;
+   @OneToMany
+    List<Book>bookList;
 }

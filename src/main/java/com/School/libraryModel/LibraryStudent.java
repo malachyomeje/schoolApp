@@ -33,6 +33,6 @@ public class LibraryStudent {
     private Department department;
     @Enumerated(EnumType.STRING)
     private Sex sex;
-    @OneToMany(mappedBy = "libraryStudent")
-    private List<Book> books;
+    @OneToMany
+    private List<BorrowedBook> borrowedBook;
 }
