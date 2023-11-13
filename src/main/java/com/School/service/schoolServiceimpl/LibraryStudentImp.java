@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +49,12 @@ public class LibraryStudentImp implements LibraryStudentService {
         LibraryStudent libraryStudent1 = LibraryStudent.builder()
                 .firstName(school1.getFirstName())
                 .lastName(school1.getLastName())
-              .email(school1.getEmail())
-               .department(school1.getDepartment())
+                .email(school1.getEmail())
+                .department(school1.getDepartment())
                 .phoneNumber(school1.getPhoneNumber())
-               .registrationNo(school1.getRegistrationNo())
-               .faculty(school1.getFaculty())
-               .sex(school1.getSex())
+                .registrationNo(school1.getRegistrationNo())
+                .faculty(school1.getFaculty())
+                .sex(school1.getSex())
                 .build();
 
        libraryStudentRepository.save(libraryStudent1);
@@ -73,25 +74,24 @@ public class LibraryStudentImp implements LibraryStudentService {
        if (libraryStudent.isEmpty()){
            return new BaseResponse<>("STUDENT NOT REGISTERED" + email);
        }
-       Optional<Book> bookOptional = bookRepository.findByBookName(borrowedBookDto.getBookName());
+       Book book = bookRepository.findByBookName(borrowedBookDto.getBookName()).orElse(null);
 
-       if (bookOptional.isEmpty()){
+       if (book == null){
            return new BaseResponse<>("BOOK IS NOT FOUND  " + borrowedBookDto.getBookName());
        }
 
-
-
-       Book book = bookOptional.get();
        LibraryStudent libraryStudent1 =libraryStudent.get();
+        List<BorrowedBook> lab =libraryStudent1.getBorrowedBook();
 
        BorrowedBook borrowedBook =BorrowedBook.builder()
                .bookName(book.getBookName())
                .author(book.getAuthor())
+               .isbnNo(book.getIsbnNo())
                .libraryStudent(libraryStudent1.getEmail())
                .build();
-        List<Book> bookList =borrowedBook.getBookList();
-        bookList.add(book);
-       borrowedBookRepository.save(borrowedBook);
+         lab.add(borrowedBook);
+         borrowedBookRepository.save(borrowedBook);
        return new BaseResponse<>("successful",borrowedBook);
+
    }
 }

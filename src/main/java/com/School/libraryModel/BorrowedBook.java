@@ -22,7 +22,7 @@ public class BorrowedBook {
     private Long id;
     private String libraryStudent;
     private String bookName;
+    private String isbnNo;
     private String author;
-   @OneToMany
-    List<Book>bookList;
+
 }
