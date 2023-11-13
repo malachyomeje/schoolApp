@@ -12,7 +12,8 @@ import java.util.List;
 @Data
 @Builder
 public class BorrowedBookDto {
-       private String bookName;
+
+    private String bookName;
     private String author;
-      private List<Book> borrowedBooks;
+     // private List<Book> borrowedBooks;
 }

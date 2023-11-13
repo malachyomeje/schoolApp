@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                         "/api/v0/auth/authenticate",
                         "/api/v1/register/**",
                         "/api/v2/libraryStudent/**",
+                        "/api/v4/book/**",
                         "/api/v3/category/**",
                         "/v3/api-docs/**",
                         "/configuration/**",

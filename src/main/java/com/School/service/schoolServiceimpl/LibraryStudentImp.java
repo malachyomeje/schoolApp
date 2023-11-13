@@ -1,12 +1,12 @@
 package com.School.service.schoolServiceimpl;
 
 import com.School.dto.request.BorrowedBookDto;
-import com.School.dto.request.LibraryStudentDto;
 import com.School.dto.response.BaseResponse;
 import com.School.libraryModel.Book;
 import com.School.libraryModel.BorrowedBook;
 import com.School.libraryModel.LibraryStudent;
 import com.School.repository.BookRepository;
+import com.School.repository.BorrowedBookRepository;
 import com.School.repository.LibraryStudentRepository;
 import com.School.repository.SchoolRepository;
 import com.School.schoolModel.School;
@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -24,6 +25,7 @@ public class LibraryStudentImp implements LibraryStudentService {
     private final SchoolRepository schoolRepository;
     private  final LibraryStudentRepository libraryStudentRepository;
     private final BookRepository bookRepository;
+    private final BorrowedBookRepository borrowedBookRepository;
 
 
 
@@ -58,31 +60,38 @@ public class LibraryStudentImp implements LibraryStudentService {
 
        return new BaseResponse<>("REGISTRATION COMPLETE",libraryStudent1);
     }
-   public  BaseResponse borrowBook (BorrowedBookDto borrowedBookDto){
+
+
+
+    @Override
+   public  BaseResponse borrowBook(BorrowedBookDto borrowedBookDto){
 
        String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
        Optional<LibraryStudent> libraryStudent = libraryStudentRepository.findByEmail(email);
 
        if (libraryStudent.isEmpty()){
-           return new BaseResponse<>("STUDENT NOT REGISTERED"+borrowedBookDto.getBorrowedBooks());
+           return new BaseResponse<>("STUDENT NOT REGISTERED" + email);
        }
        Optional<Book> bookOptional = bookRepository.findByBookName(borrowedBookDto.getBookName());
 
        if (bookOptional.isEmpty()){
-           return new BaseResponse<>("BOOK IS NOT FOUND"+borrowedBookDto.getBorrowedBooks());
+           return new BaseResponse<>("BOOK IS NOT FOUND  " + borrowedBookDto.getBookName());
        }
+
+
 
        Book book = bookOptional.get();
        LibraryStudent libraryStudent1 =libraryStudent.get();
 
-       BorrowedBook borrowedBook = new BorrowedBook();
-//               .name(libraryStudent1.getName())
-//               .email(borrowedBookDto.getEmail())
-//               .borrowedBook(borrowedBookDto.getBorrowedBooks())
-//
-//               .build();
-
-       return null;
+       BorrowedBook borrowedBook =BorrowedBook.builder()
+               .bookName(book.getBookName())
+               .author(book.getAuthor())
+               .libraryStudent(libraryStudent1.getEmail())
+               .build();
+        List<Book> bookList =borrowedBook.getBookList();
+        bookList.add(book);
+       borrowedBookRepository.save(borrowedBook);
+       return new BaseResponse<>("successful",borrowedBook);
    }
 }
