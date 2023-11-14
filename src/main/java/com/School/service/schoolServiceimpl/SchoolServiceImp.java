@@ -1,5 +1,6 @@
 package com.School.service.schoolServiceimpl;
 
+import com.School.dto.request.EmailDto;
 import com.School.dto.request.StudentDepartmentDto;
 import com.School.dto.request.StudentDto;
 import com.School.dto.response.ApiResponse;
@@ -29,6 +30,8 @@ public class SchoolServiceImp implements SchoolService {
 
     private final SchoolRepository schoolRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailServiceImp emailServiceImp;
+
 
 
     @Override
@@ -82,8 +85,15 @@ public class SchoolServiceImp implements SchoolService {
                 .department(department)
                 .faculty(faculty)
                 .role(studentDto.getRole())
-
                 .build();
+        String subject = "WELCOME TO UNIVERSITY OF NIGERIA NSUKKA ";
+        String content = "YOU HAVE BEEN REGISTERED AS A STUDENT IN UNN.. WHERE THE DIGNITY OF MAN IS RESTORED";
+
+        EmailDto emailSenderDto = new EmailDto();
+        emailSenderDto.setTo(studentDto.getEmail());
+        emailSenderDto.setSubject(subject);
+        emailSenderDto.setContent(content);
+        emailServiceImp.sendEmail(emailSenderDto);
         schoolRepository.save(school1);
         return new BaseResponse<>("registration successful", school1);
     }
