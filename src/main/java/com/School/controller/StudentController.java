@@ -45,12 +45,17 @@ public class StudentController {
 
     @GetMapping("sorting/{name}")
     public ApiResponse<List<School>> sorting (@PathVariable String name ) {
-        return schoolService.sorting(name);
+        return schoolService.schoolSorting(name);
     }
 
     @GetMapping("page/{offset}/{pageSize}")
-    public ApiResponse<Page<School>> page(@PathVariable int offset, @PathVariable int pageSize){
-        return schoolService.page(offset,pageSize);
+    public ApiResponse<Page<School>> pagination(@PathVariable int offset, @PathVariable int pageSize){
+        return schoolService.schoolPagination(offset,pageSize);
 
     }
+    @GetMapping("page/{offset}/{pageSize}/{name}")
+    public ApiResponse<Page<School>> paginationAndSorting(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String name) {
+        return schoolService.schoolPaginationAndSorting(offset, pageSize, name);
+    }
+
 }

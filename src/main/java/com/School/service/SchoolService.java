@@ -19,7 +19,10 @@ public interface SchoolService {
 
     BaseResponse findById(Long id);
 
-    ApiResponse<List<School>> sorting(String name);
+    ApiResponse<List<School>> schoolSorting(String name);
 
-    ApiResponse<Page<School>> page(int offset, int pageSize);
+
+    ApiResponse<Page<School>> schoolPagination(int offset, int pageSize);
+
+    ApiResponse<Page<School>> schoolPaginationAndSorting(int offset, int pageSize, String name);
 }
