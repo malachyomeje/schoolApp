@@ -9,4 +9,6 @@ public interface LibraryStudentService {
     BaseResponse registerLibraryStudent(String studentEmail);
 
     BaseResponse borrowBook (BorrowedBookDto borrowedBookDto);
+
+    BaseResponse returnBook(BorrowedBookDto borrowedBookDto);
 }

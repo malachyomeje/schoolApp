@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
@@ -22,8 +22,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: malakite4mlachy@gmail.com
-    password: xxxxxxxxxxxxxxxxxx
+    username: payswift7@gmail.com
+    password: xxxxxxxxxxxxxxxxxxx
     properties:
       mail:
         smtp:

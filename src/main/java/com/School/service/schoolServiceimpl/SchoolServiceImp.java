@@ -8,7 +8,6 @@ import com.School.dto.response.BaseResponse;
 import com.School.enums.Department;
 import com.School.enums.Faculty;
 import com.School.enums.Sex;
-import com.School.enums.UsersRole;
 import com.School.schoolModel.School;
 import com.School.repository.SchoolRepository;
 import com.School.service.SchoolService;
@@ -31,7 +30,6 @@ public class SchoolServiceImp implements SchoolService {
     private final SchoolRepository schoolRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailServiceImp emailServiceImp;
-
 
 
     @Override
@@ -182,18 +180,23 @@ public class SchoolServiceImp implements SchoolService {
         return new BaseResponse<>("Successful", studentDto);
     }
 
+
     @Override
-    public ApiResponse<List<School>> sorting(String name) {
+    public ApiResponse<List<School>> schoolSorting(String name) {
         List<School> sortingSchool = schoolRepository.findAll(Sort.by(Sort.Direction.ASC, name));
         return new ApiResponse<>(sortingSchool.size(), sortingSchool);
     }
-
-    @Override
-    public ApiResponse<Page<School>> page(int offset, int pageSize) {
-        Page<School> paging = schoolRepository.findAll(PageRequest.of(offset,pageSize));
+@Override
+    public ApiResponse<Page<School>> schoolPagination(int offset, int pageSize) {
+        Page<School> paging = schoolRepository.findAll(PageRequest.of(offset, pageSize));
         return new ApiResponse<>(paging.getSize(), paging);
     }
 
+@Override
+    public ApiResponse<Page<School>> schoolPaginationAndSorting(int offset, int pageSize, String name) {
+        Page<School> paging = schoolRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(name)));
+        return new ApiResponse<>(paging.getSize(), paging);
 
+    }
 }
 
